@@ -26,6 +26,16 @@ export async function createGame(game){
     return checkError(response);
 }
 
+export async function fetchDeleteGame(gameId){
+    // create a single new game in the games table using the above object
+    const response = await client
+        .from('games')
+        .delete()
+        .match({ id: gameId });
+    
+    return response;
+}
+
 export async function getGames() {
     // select all games from the games table
     const response = await client

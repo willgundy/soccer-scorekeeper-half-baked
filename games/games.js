@@ -3,6 +3,7 @@ import {
     checkAuth,
     getGames,
     createGame,
+    fetchDeleteGame
 } from '../fetch-utils.js';
 import { renderGame } from '../render-utils.js';
 
@@ -118,6 +119,7 @@ async function displayAllGames() {
     pastGamesEl.innerHTML = '';
     // FETCH ALL GAMES from supabase
     const pastGames = await getGames();
+    console.log(pastGames);
     // loop through the past games 
     // render and append a past game for each past game in state
     for (let game of pastGames) {
@@ -135,5 +137,13 @@ function createCurrentGame() {
     };
 }
 
+
+export async function deleteGame(e) {
+    console.log(e);
+
+    await fetchDeleteGame(e.path[1].id);
+    
+    displayAllGames();
+}
 
 displayCurrentGameEl();
